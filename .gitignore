@@ -1,0 +1,77 @@
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+# debug information files
+*.dwo
+*.efi
+
+*.img
+*.tar.xz
+*.tar.gz
+*.itb
+*.bin
+*.deb
+*.ddeb
+*.iso
+
+acrn-hypervisor
+acrn-kernel
+target
+linux-upstream_*
+
+/*.tar.gz
+/gcc-linaro-7.2.1-2017.11-x86_64_aarch64-linux-gnu
+/linux-4.19.238
+/minos
+/sdboot
+/u-boot
