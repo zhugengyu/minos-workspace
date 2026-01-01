@@ -11,6 +11,14 @@ minos_tools:
 		tar -xJvf gcc-linaro-7.2.1-2017.11-x86_64_aarch64-linux-gnu.tar.xz; \
 	fi
 
+minos_distclean:
+	rm gcc-linaro-7.2.1-2017.11-x86_64_aarch64-linux-gnu.tar.xz
+	rm -rf gcc-linaro-7.2.1-2017.11-x86_64_aarch64-linux-gnu
+	rm -rf minos
+	rm -rf u-boot
+	rm linux-4.19.238.tar.gz
+	rm virtio-sd.img.tar.xz
+
 minos_src_dl:
 	@if [ ! -d minos ]; then \
 		git clone https://github.com/zhugengyu/minos.git; \
@@ -28,9 +36,6 @@ minos_src_dl:
 		wget https://github.com/zhugengyu/minos-workspace/releases/download/0.1/virtio-sd.img.tar.xz && \
 		tar -xJvf virtio-sd.img.tar.xz;\
 	fi
-# 	@if [ ! -f ramdisk.bin ]; then \
-# 		wget https://github.com/zhugengyu/minos-workspace/releases/download/0.0/ramdisk.bin; \
-# 	fi
 
 minos_uboot_build:
 	cd u-boot && \
