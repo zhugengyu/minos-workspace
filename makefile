@@ -13,10 +13,10 @@ minos_tools:
 
 minos_src_dl:
 	@if [ ! -d minos ]; then \
-		git clone https://github.com/minosproject/minos.git; \
+		git clone https://github.com/zhugengyu/minos.git; \
 	fi
 	@if [ ! -d u-boot ]; then \
-		git clone https://github.com/minosproject/u-boot.git; \
+		git clone https://github.com/zhugengyu/u-boot.git; \
 	fi
 	@if [ ! -f linux-4.19.238.tar.gz ]; then \
 		wget https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/linux-4.19.238.tar.gz && \
@@ -28,9 +28,9 @@ minos_src_dl:
 		wget https://github.com/zhugengyu/minos-workspace/releases/download/0.1/virtio-sd.img.tar.xz && \
 		tar -xJvf virtio-sd.img.tar.xz;\
 	fi
-	@if [ ! -f ramdisk.bin ]; then \
-		wget https://github.com/zhugengyu/minos-workspace/releases/download/0.0/ramdisk.bin; \
-	fi
+# 	@if [ ! -f ramdisk.bin ]; then \
+# 		wget https://github.com/zhugengyu/minos-workspace/releases/download/0.0/ramdisk.bin; \
+# 	fi
 
 minos_uboot_build:
 	cd u-boot && \
