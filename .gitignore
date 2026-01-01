@@ -63,6 +63,7 @@ dkms.conf
 *.deb
 *.ddeb
 *.iso
+*.dtb
 
 acrn-hypervisor
 acrn-kernel

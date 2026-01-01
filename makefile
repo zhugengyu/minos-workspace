@@ -6,15 +6,31 @@ minos_deps:
 	sudo apt-get install abootimg device-tree-compiler
 
 minos_tools:
-	wget https://releases.linaro.org/components/toolchain/binaries/7.2-2017.11/aarch64-linux-gnu/gcc-linaro-7.2.1-2017.11-x86_64_aarch64-linux-gnu.tar.xz
-	tar -xJvf gcc-linaro-7.2.1-2017.11-x86_64_aarch64-linux-gnu.tar.xz
+	@if [ ! -f gcc-linaro-7.2.1-2017.11-x86_64_aarch64-linux-gnu.tar.xz ]; then \
+		wget https://releases.linaro.org/components/toolchain/binaries/7.2-2017.11/aarch64-linux-gnu/gcc-linaro-7.2.1-2017.11-x86_64_aarch64-linux-gnu.tar.xz && \
+		tar -xJvf gcc-linaro-7.2.1-2017.11-x86_64_aarch64-linux-gnu.tar.xz; \
+	fi
 
 minos_src_dl:
-	git clone https://github.com/minosproject/minos.git
-	git clone https://github.com/minosproject/u-boot.git
-	wget https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/linux-4.19.238.tar.gz
-	tar xvzf linux-4.19.238.tar.gz
-	cp -r minos/generic/minos-linux-driver linux-4.19.238/drivers/minos
+	@if [ ! -d minos ]; then \
+		git clone https://github.com/minosproject/minos.git; \
+	fi
+	@if [ ! -d u-boot ]; then \
+		git clone https://github.com/minosproject/u-boot.git; \
+	fi
+	@if [ ! -f linux-4.19.238.tar.gz ]; then \
+		wget https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/linux-4.19.238.tar.gz && \
+		tar xvzf linux-4.19.238.tar.gz && \
+		echo "obj-y += minos/" >> linux-4.19.238/drivers/Makefile && \
+		cp -r minos/generic/minos-linux-driver linux-4.19.238/drivers/minos; \
+	fi
+	@if [ ! -f virtio-sd.img.tar.xz ]; then \
+		wget https://github.com/zhugengyu/minos-workspace/releases/download/0.1/virtio-sd.img.tar.xz && \
+		tar -xJvf virtio-sd.img.tar.xz;\
+	fi
+	@if [ ! -f ramdisk.bin ]; then \
+		wget https://github.com/zhugengyu/minos-workspace/releases/download/0.0/ramdisk.bin; \
+	fi
 
 minos_uboot_build:
 	cd u-boot && \
@@ -50,5 +66,3 @@ minos_run:
 		-drive if=none,file=virtio-sd.img,format=raw,id=hd0 \
 		-device virtio-blk-device,drive=hd0 \
 		-device virtio-net-device,netdev=net0 -netdev user,id=net0,hostfwd=tcp:127.0.0.1:5555-:22	
-
-include $(ROOT_DIR)/minos.rpi3b.mk
